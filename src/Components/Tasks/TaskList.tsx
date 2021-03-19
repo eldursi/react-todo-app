@@ -1,6 +1,7 @@
 import React from "react"
 import Checkbox from '@material-ui/core/Checkbox';
-import { FormControl, FormControlLabel, FormGroup } from "@material-ui/core";
+import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
+import { Box, Container, FormControl, FormControlLabel, FormGroup, Typography } from "@material-ui/core";
 import useStyles from "./Styling";
 
 enum status
@@ -35,15 +36,23 @@ const tasks = [
 export const TaskList = (props: any) => {
     const classes = useStyles()
     return (
-        <div>
+        <Container className={classes.taskListContainer} >
             <div className={classes.toolbar} />
-            <h1>{props.title}</h1>
-            <FormControl>
-                <FormGroup>
-                    {tasks.map(t => <TaskCheckbox key={t.id} task={t}/>)}
-                </FormGroup>
-            </FormControl>
-        </div>
+            <Box className={classes.header}>
+                <Box className={classes.taskListTitleHeader}>
+                    <LocalOfferOutlinedIcon />
+                    <Typography component="h1" variant="h6" className={classes.taskListTitle}>ToDo List 1</Typography>
+                </Box>
+                <Typography component="span" variant="subtitle1" style={{display:"block"}}>{tasks.length} tasks</Typography>
+            </Box>
+            <Box>
+                <FormControl>
+                    <FormGroup>
+                        {tasks.map(t => <TaskCheckbox key={t.id} task={t}/>)}
+                    </FormGroup>
+                </FormControl>
+            </Box>
+        </Container>
     )
 }
 
@@ -52,7 +61,7 @@ const TaskCheckbox = (props:any) => {
     const task: Task = props.task
     return (
         <FormControlLabel
-            control={<Checkbox checked={task.status == status.done} name="done" />}
+            control={<Checkbox checked={task.status === status.done} name="done" />}
             label={task.name}
         />
     )

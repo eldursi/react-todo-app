@@ -1,14 +1,12 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { SideBar } from './Components/SideBar/SideBar';
-import { TaskList } from './Components/Tasks/TaskList';
+import ToDoApp from './Components/ToDoApp/ToDoApp';
 
 function App() {
   return (
     <div className="App">
-      <SideBar/>
-      <TaskList/>
+      <ToDoApp />
     </div>
   );
 }

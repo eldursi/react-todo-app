@@ -8,38 +8,73 @@ const useStyles = makeStyles((theme: Theme) =>  createStyles({
     },
     header:{
       "& > *": {
-        margin:0,
-        paddingLeft: '1rem'
+        marginLeft: theme.spacing(2.9)
       }
     },
     drawer:{
       width: drawerWidth,
-      margin: theme.spacing(1)
+      height: "100vh"
     },
     taskCategories:{
       display: "flex",
       flexWrap: "wrap",
-      justifyContent: "center"
+    },
+    taskCategoriesContainer:{
+      paddingLeft: theme.spacing(1.5),
+      paddingRight: theme.spacing(1.5)
     },
     taskCategory:{
-      margin: theme.spacing(1),
-      width: theme.spacing(16),
-      height: theme.spacing(16),
+      margin: theme.spacing(1.2),
+      width: theme.spacing(15),
+      height: theme.spacing(15),
+      backgroundColor: "white",
+      borderRadius: "3%"
     },
     addCategory:{
-      marginLeft: '1rem',
-      backgroundColor: "#70c570",
-      color:"white",
-      width: theme.spacing(16),
+      width: theme.spacing(15),
+      marginLeft: theme.spacing(1.2),
+      borderRadius: "4%"
     },
     addCategoryListItem:{
+      backgroundColor: "#70c570",
+      color:"white",
       textAlign: "center",
+      "& *": {
+        fontSize: "1.3rem",
+      }
+    },
+    addCategoryDialogAction:{
+      padding: 0,
+      "& button": {
+        borderRadius: "0",
+      }
+    },
+    addCategoryInput:{
+      "&&&:before": {
+        borderBottom: "none"
+      },
+      "&&:after": {
+        borderBottom: "none"
+      }
     },
     taskCategoryListItem:{
-      height: '100%'
+      height: '100%',
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "flex-start",
+      padding: "0.7rem"
+    },
+    taskCategoryTitle:{
+      marginTop: "auto",
+      "& *": {
+        fontSize: "0.8rem",
+        fontWeight: "bold"
+      }
     },
     drawerPaper: {
-      width: drawerWidth
+      width: drawerWidth,
+      borderRight: "none",
+      backgroundColor: "#f3f3f370"
     }
   })
 )
