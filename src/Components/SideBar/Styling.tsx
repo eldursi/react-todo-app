@@ -30,13 +30,19 @@ const useStyles = makeStyles((theme: Theme) =>  createStyles({
       backgroundColor: "white",
       borderRadius: "3%"
     },
+    taskCategoryInactive:{
+      backgroundColor: "white",
+    },
+    taskCategoryActive:{
+      backgroundColor: "#ededee"
+    },
     addCategory:{
       width: theme.spacing(15),
       marginLeft: theme.spacing(1.2),
       borderRadius: "4%"
     },
     addCategoryListItem:{
-      backgroundColor: "#70c570",
+      backgroundColor: "#7bbb5e",
       color:"white",
       textAlign: "center",
       "& *": {
@@ -74,7 +80,7 @@ const useStyles = makeStyles((theme: Theme) =>  createStyles({
     drawerPaper: {
       width: drawerWidth,
       borderRight: "none",
-      backgroundColor: "#f3f3f370"
+      backgroundColor: "#fafafa"
     }
   })
 )
