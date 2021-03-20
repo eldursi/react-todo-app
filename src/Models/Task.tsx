@@ -1,4 +1,4 @@
-enum status
+export enum status
 {
     new,
     done
@@ -13,7 +13,6 @@ export class Task {
     }
 
     id: any
-    categoryId: any
     name: string = ""
     date: Date | undefined
     status: status

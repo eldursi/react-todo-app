@@ -1,49 +1,29 @@
-import React from "react"
 import Checkbox from '@material-ui/core/Checkbox';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 import { Box, Container, FormControl, FormControlLabel, FormGroup, Typography } from "@material-ui/core";
 import useStyles from "./Styling";
-
-enum status
-{
-    new,
-    done
-}
-
-class Task {
-    constructor(id: any, name: string, date: Date, status: status){
-        this.id = id
-        this.name = name
-        this.date = date
-        this.status = status
-    }
-
-    id: any
-    name: string = ""
-    date: Date | undefined
-    status: status
-} 
-
-
-const tasks = [
-    new Task("1", "Task 1", new Date(), status.new),
-    new Task("2", "Task 2", new Date(), status.new),
-    new Task("3", "Task 3", new Date(), status.new),
-    new Task("4", "Task 4", new Date(), status.new),
-    new Task("5", "Task 5", new Date(), status.new)
-];
+import { Task, status } from "../../Models/Task";
 
 export const TaskList = (props: any) => {
+    const activeTaskCategory = props.taskCategories.filter((taskCategory) => {
+        return taskCategory.active
+      })[0]
+    console.log(activeTaskCategory)
+    const { tasks, components , icon, name}  = activeTaskCategory
+    const IconComponent = components[icon]
+
     const classes = useStyles()
     return (
         <Container className={classes.taskListContainer} >
             <div className={classes.toolbar} />
             <Box className={classes.header}>
                 <Box className={classes.taskListTitleHeader}>
-                    <LocalOfferOutlinedIcon />
-                    <Typography component="h1" variant="h6" className={classes.taskListTitle}>ToDo List 1</Typography>
+                    <Box className={classes.taskListIcon}>{(IconComponent != null)? <IconComponent/> : <LocalOfferOutlinedIcon/>}</Box>
+                    <Box className={classes.taskListTitle}>
+                        <Typography component="h1" variant="h6">{name}</Typography>
+                        <Typography component="span" variant="subtitle1" style={{display:"block"}}>{tasks.length} tasks</Typography>
+                    </Box>
                 </Box>
-                <Typography component="span" variant="subtitle1" style={{display:"block"}}>{tasks.length} tasks</Typography>
             </Box>
             <Box>
                 <FormControl>

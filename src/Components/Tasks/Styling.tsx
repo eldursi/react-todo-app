@@ -16,8 +16,18 @@ const useStyles = makeStyles((theme: Theme) =>  createStyles({
       display:"inline-flex",
     },
     taskListTitle:{
-      fontWeight: "bold",
-      marginLeft: theme.spacing(2)
+      "& h1":{
+        fontWeight: "bold",
+      },
+      "& span":{
+        fontSize: "0.7rem",
+        color: "#7c7d7d"
+      },
+      marginLeft: theme.spacing(1.2)
+    },
+    taskListIcon:{
+      marginTop: theme.spacing(0.5),
+      color: "#0000008a"
     }
   })
 )

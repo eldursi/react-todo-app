@@ -48,7 +48,6 @@ export const TaskCategory = (props:any) =>
             {
                 taskCategory.active = false
             }  
-            console.log(taskCategory)          
         });
         props.setTaskCategories([...taskCategories])       
     }
@@ -90,10 +89,7 @@ const NewTaskCategory = (props:any) => {
         const addTaskCategory = props.addTaskCategory
         const newCategory = new TaskCategoryItem(
             Guid.create().toString(),
-            listName,
-            "",
-            0,
-            false)                
+            listName)                
         addTaskCategory(oldTaskCategories => [...oldTaskCategories, newCategory])
         handleClose()
     }
