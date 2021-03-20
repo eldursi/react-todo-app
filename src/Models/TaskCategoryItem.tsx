@@ -1,4 +1,3 @@
-import { Component } from "react"
 import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
 import InboxIcon from '@material-ui/icons/Inbox';

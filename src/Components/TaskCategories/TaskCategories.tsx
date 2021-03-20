@@ -1,35 +1,31 @@
-import useStyles from "../SideBar/Styling"
+import useStyles from "./Styling"
 import { Box, Button, Container, List, ListItem, ListItemIcon, ListItemText, TextField, Typography } from "@material-ui/core"
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
-import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
-import { Guid } from "guid-typescript";
 import { useState } from "react";
 import { TaskCategoryItem } from "../../Models/TaskCategoryItem";
 import Dialog from '@material-ui/core/Dialog';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogActions from '@material-ui/core/DialogActions';
+import { Guid } from "guid-typescript";
 
 export const TaskCategoryList = (props: any) => {
     const classes = useStyles()
     const taskCategories = props.taskCategories
     const setTaskCategories = props.setTaskCategories
-    console.log(taskCategories)            
     return (
         <Container className={classes.taskCategoriesContainer}>
             <List className={classes.taskCategories}>
                 {taskCategories.map((taskCategory, index) => {
-                    const taskCategoryIcon = taskCategory.components[taskCategory.icon]
                     return (<TaskCategory 
-                        active={taskCategory.active}
-                        name={taskCategory.name} 
-                        numberOfTasks={taskCategory.numberOfTasks} 
-                        icon={taskCategoryIcon} 
+                        taskCategory={taskCategory}
+                        taskCategories={taskCategories}
+                        setTaskCategories={setTaskCategories}
                         key={index} />)
                 })}
             </List>
             <Box className={classes.addCategory}>
-                <NewTaskCategory taskCategories={taskCategories} addTaskCategory={setTaskCategories} />  
+                <NewTaskCategory addTaskCategory={setTaskCategories} />  
             </Box>
         </Container>
     )
@@ -38,20 +34,38 @@ export const TaskCategoryList = (props: any) => {
 export const TaskCategory = (props:any) =>
 {
     const classes = useStyles()
-    const Icon = props.icon
+    const taskCategories = props.taskCategories
+    var {name, active, numberOfTasks, components, icon, id} = props.taskCategory;
+    const IconComponent = components[icon]
+
+    const setActiveCategory = () => {    
+        taskCategories.forEach( taskCategory => {
+            if(taskCategory.id == id)
+            {
+                taskCategory.active = true
+            }
+            else
+            {
+                taskCategory.active = false
+            }  
+            console.log(taskCategory)          
+        });
+        props.setTaskCategories([...taskCategories])       
+    }
+
     return (
         <Box 
-        className={`${classes.taskCategory} ${props.active ? classes.taskCategoryActive: classes.taskCategoryInactive}`} 
-        boxShadow={props.active ? 0 : 1}>
-            <ListItem button className={classes.taskCategoryListItem}>
+        className={`${classes.taskCategory} ${active ? classes.taskCategoryActive: classes.taskCategoryInactive}`} 
+        boxShadow={active ? 0 : 1}>
+            <ListItem  id={id} button className={classes.taskCategoryListItem} onClick={setActiveCategory}>
                 <Box>
                     <ListItemIcon>
-                        {(Icon != null)? <Icon /> : <LocalOfferOutlinedIcon style={{height: "1.2rem"}}/>}
+                        {(IconComponent != null)? <IconComponent style={{height: "1.2rem"}}/> : <LocalOfferOutlinedIcon style={{height: "1.2rem"}}/>}
                     </ListItemIcon>
                 </Box>
                 <Box className={classes.taskCategoryTitle}>
-                    <ListItemText primary={props.name} />
-                    <Typography component="span" style={{fontSize:"0.7rem", color:"#7c7d7d"}}>{props.numberOfTasks} tasks</Typography>
+                    <ListItemText primary={name} />
+                    <Typography component="span" style={{fontSize:"0.7rem", color:"#7c7d7d"}}>{numberOfTasks} tasks</Typography>
                 </Box>
             </ListItem>
         </Box>
