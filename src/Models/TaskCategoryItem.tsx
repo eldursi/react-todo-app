@@ -11,14 +11,12 @@ export class TaskCategoryItem {
         this.tasks = tasks
         this.active = active
         this.icon = icon
-        this.numberOfTasks = tasks.length
     }
 
     id: string
     name: string = ""
     color: string = ""
     tasks: Task[] = []
-    numberOfTasks: number
     active: boolean
     icon: string
 

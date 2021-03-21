@@ -5,14 +5,14 @@ export enum status
 }
 
 export class Task {
-    constructor(id: any, name: string, date: Date, status: status){
+    constructor(id: string, name: string, status: status, date?: Date){
         this.id = id
         this.name = name
         this.date = date
         this.status = status
     }
 
-    id: any
+    id: string
     name: string = ""
     date: Date | undefined
     status: status

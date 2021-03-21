@@ -12,17 +12,14 @@ const ToDoApp = () =>
             "Today", 
             "red", 
             [
-                new Task("1", "Test task", new Date(), status.new)
+                new Task("1", "Test task", status.new)
             ], 
             true, 
             "BookmarkBorderIcon"),
         new TaskCategoryItem("2",
         "Inbox",
         "red",
-        [
-            new Task("1", "Test task", new Date(), status.new),
-            new Task("2", "Test task 2", new Date(), status.new)
-        ],
+        [],
         false,
         "InboxIcon")
     ]

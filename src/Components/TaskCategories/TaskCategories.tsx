@@ -35,12 +35,12 @@ export const TaskCategory = (props:any) =>
 {
     const classes = useStyles()
     const taskCategories = props.taskCategories
-    var {name, active, numberOfTasks, components, icon, id} = props.taskCategory;
+    var {name, active, components, icon, id, tasks} = props.taskCategory;
     const IconComponent = components[icon]
 
     const setActiveCategory = () => {    
         taskCategories.forEach( taskCategory => {
-            if(taskCategory.id == id)
+            if(taskCategory.id === id)
             {
                 taskCategory.active = true
             }
@@ -64,7 +64,7 @@ export const TaskCategory = (props:any) =>
                 </Box>
                 <Box className={classes.taskCategoryTitle}>
                     <ListItemText primary={name} />
-                    <Typography component="span" style={{fontSize:"0.7rem", color:"#7c7d7d"}}>{numberOfTasks} tasks</Typography>
+                    <Typography component="span" style={{fontSize:"0.7rem", color:"#7c7d7d"}}>{tasks.length} tasks</Typography>
                 </Box>
             </ListItem>
         </Box>

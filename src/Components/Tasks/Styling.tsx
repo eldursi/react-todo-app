@@ -6,7 +6,9 @@ const useStyles = makeStyles((theme: Theme) =>  createStyles({
     } ,
     taskListContainer:{
       padding:0,
-      marginLeft: theme.spacing(4)
+      marginLeft: theme.spacing(4),
+      marginRight: theme.spacing(4),
+      width: "100%"
     },
     header:{
       height: theme.spacing(8),
@@ -28,6 +30,58 @@ const useStyles = makeStyles((theme: Theme) =>  createStyles({
     taskListIcon:{
       marginTop: theme.spacing(0.5),
       color: "#0000008a"
+    },
+    addNewTaskButton:{
+      padding: theme.spacing(0.25),
+      color: "#0000008a",
+      display: "flex",
+      justifyContent: "flex-start",
+      alignItems: "flex-end",
+      position: "absolute",
+      bottom: "10px"
+    },
+    addTask:{
+      width: theme.spacing(15),
+      marginLeft: theme.spacing(1.2),
+      borderRadius: "4%"
+    },
+    addTaskListItem:{
+      backgroundColor: "#7bbb5e",
+      color:"white",
+      textAlign: "center",
+      "& *": {
+        fontSize: "1.3rem",
+      }
+    },
+    addTaskDialogAction:{
+      padding: 0,
+      "& button": {
+        borderRadius: "0",
+      }
+    },
+    addTaskInput:{
+      "&&&:before": {
+        borderBottom: "none"
+      },
+      "&&:after": {
+        borderBottom: "none"
+      }
+    },
+    taskCheckboxActive:{
+      textDecoration: "line-through"
+    },
+    taskCheckbox:{},
+    taskItem:{
+      flexDirection:"row",
+      width: "100%",
+      justifyContent: "space-between"
+    },
+    taskForm:{
+      width: "100%"
+    },
+    actionButton:{
+      color: "#0000008a",
+      minWidth:"fit-content"
     }
   })
 )
