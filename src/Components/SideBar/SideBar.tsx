@@ -1,6 +1,7 @@
 import { Drawer, Typography } from "@material-ui/core"
 import useStyles from "./Styling"
 import { TaskCategoryList } from "../TaskCategories/TaskCategories";
+import { GetDay, GetMonth } from "../Shared/Date";
 
 export const SideBar = (props: any) => {
     const taskCategories = props.taskCategories
@@ -24,17 +25,14 @@ export const SideBar = (props: any) => {
 }
 
 const DateToday = () => {
-    const days = ['SUNDAY', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY']
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const today = new Date()
-    const dayName = days[today.getDay()]
-    const monthName = months[today.getMonth()]
+    const dayName = GetDay()
+    const monthName = GetMonth()
 
     const classes = useStyles()
     return (
         <div className={classes.header}>
             <Typography component="span" style={{fontSize:"0.7rem", color:"#7c7d7d"}}>{dayName}</Typography>
-            <Typography component="h3" variant="h6" style={{fontWeight:"bold"}}>{today.getDate().toString()} {monthName}</Typography>
+            <Typography component="h3" variant="h6" style={{fontWeight:"bold"}}>{new Date().getDate().toString()} {monthName}</Typography>
         </div>
     )
 }

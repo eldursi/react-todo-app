@@ -68,9 +68,21 @@ const useStyles = makeStyles((theme: Theme) =>  createStyles({
       }
     },
     taskCheckboxActive:{
-      textDecoration: "line-through"
+      textDecoration: "line-through",
     },
-    taskCheckbox:{},
+    taskCheckbox:{
+    },
+    taskDate:{
+      fontSize: '0.8rem',
+      marginLeft: '2rem',
+      color: '#7c7d7d',
+      display: 'block',
+      marginTop: '-10px'
+    },
+    overdueMessage:{
+      fontSize: '0.8rem',
+      color: 'red'
+    },
     taskItem:{
       flexDirection:"row",
       width: "100%",

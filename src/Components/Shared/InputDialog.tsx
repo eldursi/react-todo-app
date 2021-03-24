@@ -1,8 +1,10 @@
-import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button } from "@material-ui/core"
-import React from "react"
+import { Dialog, DialogTitle, DialogContent, TextField, DialogActions, Button, Grid } from "@material-ui/core"
 import useStyles from "../Tasks/Styling"
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import React from "react";
 
-const InputDialog = (props:any) =>
+export const InputDialog = (props:any) =>
 {
     const classes = useStyles()
     const {open, handleClose, handleOnClick, title, buttonText, handleOnChange, value} = props
@@ -32,4 +34,38 @@ const InputDialog = (props:any) =>
     )
 }
 
-export default InputDialog
+export const DateDialog = (props:any) => 
+{
+    const classes = useStyles()
+    const {open, handleClose, handleOnClick, buttonText, handleOnChange, value} = props
+    return (
+        <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title" fullWidth>
+            <DialogContent>
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Grid container justify='space-around'>
+                        <KeyboardDatePicker
+                            disableToolbar
+                            variant='static'
+                            format='MM/dd/yyyy'
+                            margin='normal'
+                            id='date-picker'
+                            label='Date Picker'
+                            value={value}
+                            onChange={handleOnChange}
+                            KeyboardButtonProps={{
+                                'aria-label': 'change date'
+                            }}
+                            />
+                    </Grid>
+                </MuiPickersUtilsProvider>
+
+            </DialogContent>
+            <DialogActions className = {classes.addTaskDialogAction}>
+                <Button onClick={handleOnClick} color="primary" fullWidth className = {classes.addTaskListItem}>
+                {buttonText}
+                </Button>
+            </DialogActions>
+        </Dialog>
+    )
+}
+

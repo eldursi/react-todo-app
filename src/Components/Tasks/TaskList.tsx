@@ -1,18 +1,16 @@
 import Checkbox from '@material-ui/core/Checkbox';
 import LocalOfferOutlinedIcon from '@material-ui/icons/LocalOfferOutlined';
-import { Box, Button, FormControl, FormControlLabel, FormGroup, TextField, Typography } from "@material-ui/core";
+import { Box, Button, FormControl, FormControlLabel, FormGroup, Typography } from "@material-ui/core";
 import useStyles from "./Styling";
 import { Task, status } from "../../Models/Task";
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Guid } from 'guid-typescript';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogActions from '@material-ui/core/DialogActions';
 import AddBoxIcon from '@material-ui/icons/AddBox';
 import EditIcon from '@material-ui/icons/Edit';
-import InputDialog from '../Shared/InputDialog';
+import { InputDialog, DateDialog } from '../Shared/InputDialog';
 import DeleteIcon from '@material-ui/icons/Delete';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import { GetMonth } from "../Shared/Date";
 
 export const TaskList = (props: any) => {
     const taskCategories = props.taskCategories
@@ -63,7 +61,7 @@ export const TaskList = (props: any) => {
             </Box>
             <Box>
                 <NewTask addTask={handleTaskListUpdate} tasks={tasks}/>
-            </Box>
+            </Box>        
         </div>
     )
 }
@@ -81,7 +79,9 @@ const TaskItem = (props:any) => {
         });
     }
     return (
-        <TaskCheckbox task={task} tasks={tasks} updateTask={handleTaskUpdate} setTasks={setTasks}/>
+        <>
+            <TaskCheckbox task={task} tasks={tasks} updateTask={handleTaskUpdate} setTasks={setTasks}/>
+        </>
     )
 }
 
@@ -90,6 +90,8 @@ const TaskCheckbox = (props:any) => {
     // displays the task checkbox and task title with the edit and delete option 
     const task  = props.task
     const classes = useStyles()
+    const taskDate = task.date ? `${task.date.getDate()} ${GetMonth(task.date)}` : ""
+    const overdue = task.date < new Date()
     const handleOnChange = (event:any) => {
         if(event.target.checked)
         {
@@ -105,17 +107,62 @@ const TaskCheckbox = (props:any) => {
     const checkboxClass = checked ? classes.taskCheckboxActive: classes.taskCheckbox
     return (
         <>
-            <FormControlLabel
-                control={<Checkbox onChange={handleOnChange} checked={checked}
-                name="done" />}
-                className={checkboxClass}
-                label={task.name}
-            />
+            <Box>
+                <FormControlLabel
+                    control={
+                    <Checkbox onChange={handleOnChange} checked={checked}
+                        name="done" />
+                    }
+                    className={checkboxClass}
+                    label={task.name}
+                />
+                <Typography component="span" variant="subtitle1" className={classes.taskDate}>{overdue && <b className={classes.overdueMessage}>Overdue: </b>} {taskDate}</Typography>
+            </Box>
             <Box>
                 <EditTask task={task} updateTask={props.updateTask}/>
                 <DeleteTask task={task} tasks={props.tasks} setTasks={props.setTasks}/>
+                <SetTaskDate task={task} updateTask={props.updateTask}/>
             </Box>
         </>
+    )
+}
+
+const SetTaskDate = (props:any) => {
+    const { task, updateTask } = props
+    const [open, setOpen] = useState(false);
+    const [date, setDate] = useState(new Date());
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+    
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleChange = (event:any) => {
+        console.log("in handleOnChange")
+        setDate(event)
+    }
+    const handleClick = (event:any) => {
+        task.date=date
+        updateTask(task)
+        handleClose()
+        console.log("in handleClick, date is "+ task.date.toString())
+    }
+
+    return (
+        <>
+            <SetTaskDateButton handleOnClick={handleClickOpen}/>
+            <DateDialog open={open} handleClose={handleClose} handleOnChange={handleChange} handleOnClick={handleClick} buttonText={"Save"} value={date}/>
+        </>
+    );     
+}
+
+const SetTaskDateButton = (props:any) => {
+    const classes = useStyles();
+    return (
+        <Button onClick={props.handleOnClick} startIcon={<CalendarTodayIcon/>} className={classes.actionButton}/>
     )
 }
 
@@ -203,7 +250,7 @@ const DeleteTask = (props:any) => {
     const { task, tasks, setTasks } = props
     const handleOnClick = () => {
         const updatedTasks = tasks.filter(function(element){ 
-            return element.id != task.id; 
+            return element.id !== task.id; 
         });
         setTasks(updatedTasks)
     }
