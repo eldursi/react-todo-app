@@ -56,7 +56,7 @@ export const TaskCategory = (props:any) =>
         <Box 
         className={`${classes.taskCategory} ${active ? classes.taskCategoryActive: classes.taskCategoryInactive}`} 
         boxShadow={active ? 0 : 1}>
-            <ListItem  id={id} button className={classes.taskCategoryListItem} onClick={setActiveCategory}>
+            <ListItem  id={id} button classes={{root:classes.taskCategoryListItem }} onClick={setActiveCategory}>
                 <Box>
                     <ListItemIcon>
                         {(IconComponent != null)? <IconComponent style={{height: "1.2rem"}}/> : <LocalOfferOutlinedIcon style={{height: "1.2rem"}}/>}

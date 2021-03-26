@@ -63,13 +63,6 @@ const useStyles = makeStyles((theme: Theme) =>  createStyles({
         borderBottom: "none"
       }
     },
-    taskCategoryListItem:{
-      height: '100%',
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "flex-start",
-      padding: "0.7rem"
-    },
     taskCategoryTitle:{
       marginTop: "auto",
       "& *": {
